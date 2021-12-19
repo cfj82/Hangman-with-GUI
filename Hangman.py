@@ -83,13 +83,13 @@ img_lbl.config(image=photos[00])  # placed here for when run will show at start
 
 # ---- hint
 hintLbl = StringVar()
-hint_lbl = Label(f0, font=("verdana", 10, "bold"), anchor="center", relief=SUNKEN, border=15,
+hint_lbl = Label(f0, font=("verdana", 20, "bold"), anchor="center", relief=SUNKEN, border=15,
                  bg="#5DADE2", textvariable=hintLbl)
 hint_lbl.grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky='nswe')
 
 # enter
 guessed_letter = StringVar()
-enter = Entry(f0, font=("verdana", 10), relief=RIDGE, border=15, justify="center",
+enter = Entry(f0, font=("verdana", 20), relief=RIDGE, border=15, justify="center",
               bg="#744697", textvariable=guessed_letter)
 enter.grid(row=2,  column=1, columnspan=2, padx=5, pady=5, sticky='nswe')
 enter.bind('<Return>', guess)
@@ -97,16 +97,16 @@ enter.focus()
 
 # lives left
 lives_output = StringVar()
-lbl = Label(f0, font=("verdana", 10), anchor="center", relief=FLAT, border=15,
+lbl = Label(f0, font=("verdana", 20), anchor="center", relief=FLAT, border=15,
             bg="#5DADE2", textvariable=lives_output)
 lbl.grid(row=3,  column=1, columnspan=2, padx=5, pady=5, sticky='nswe')
 
 # new game and quit buttons
-new_btn = Button(f0, font=("verdana", 10), anchor="center", relief=RAISED, border=10,
+new_btn = Button(f0, font=("verdana", 15), anchor="center", relief=RAISED, border=10,
                  bg="#5DADE2", text="New Game", command=new_game)
 new_btn.grid(row=0, column=1, padx=5, pady=5, sticky='nswe')
 
-quit_btn = Button(f0, font=("verdana", 10), anchor="center", relief=RAISED, border=10,
+quit_btn = Button(f0, font=("verdana", 15), anchor="center", relief=RAISED, border=10,
                   bg="#5DADE2", text="Quit", command=quit)
 quit_btn.grid(row=0, column=2, padx=5, pady=5, sticky='nswe')
 
