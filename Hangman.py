@@ -14,6 +14,7 @@ def new_game():
     global lives
     lives = 7
     word = random.choice(word_bank)
+    img_lbl.config(image=photos[00])  # placed here for when run will show at start
     hint_word = "".join("*" * len(word))  # ' '.join(['a', 'b', 'cd']) --> 'a b cd'
     hintLbl.set(hint_word)  # set output of hint with *
     return word.upper()
@@ -34,6 +35,7 @@ def guess(event):
                 lives -= 1  # lose life for wrong guess
                 guessed_letters.append(letter_guess)  # add guess letter to guessed letters bank
                 enter.delete(0, END)
+                img_lbl.config(image=photos[lives])  # photo number is same as lives
                 lives_output.set("You Have " + str(lives) + " Left")
             else:  # guess in word
                 guessed_letters.append(letter_guess)  # add guessed letter to guessed letters bank
@@ -56,6 +58,7 @@ def guess(event):
                 hintLbl.set("Game Over, You Lose")
                 quit()
 
+
 def quit():
     msg = messagebox.askyesno("Quit", "Do You Want To Quit?")
     if msg:
@@ -63,52 +66,49 @@ def quit():
 
 root = Tk()
 root.title("Hangman")
-root.configure(width=500, height=550, bg="black")
+root.geometry('500x350')
+root.configure(bg="black")
+root.columnconfigure(0, weight=1)
+
+photos = [PhotoImage(file='1.png'),PhotoImage(file="2.png"),PhotoImage(file="3.png"),
+          PhotoImage(file="4.png"),PhotoImage(file="5.png"),PhotoImage(file="6.png"),PhotoImage(file="00.png")]
 
 f0 = Frame(root, bg="black")  # ---- hint
-f0.pack(fill="both", expand=True)
-f1 = Frame(root, bg="black")
-f1.pack(fill="both", expand=True)
-f2 = Frame(root, bg="black")
-f2.pack(fill="both", expand=True)
-f3 = Frame(root, bg="black")
-f3.pack(fill="both", expand=True)
-f4 = Frame(root, bg="black")
-f4.pack(fill="both", expand=True)
+f0.pack(expand=True)
 
-# hangman
-title_lbl = Label(f0, font=("verdana", 20, "bold", "italic"), anchor="center", relief=FLAT, border=15,
-                  bg="#5DADE2", text="--- HANGMAN ---")
-title_lbl.pack(fill="both", expand=True, padx=25, pady=5)
+# visuals
+img_lbl = Label(f0)
+img_lbl.grid(row=0, rowspan=4, column=0, sticky='nswe')
+img_lbl.config(image=photos[00])  # placed here for when run will show at start
 
 # ---- hint
 hintLbl = StringVar()
-hint_lbl = Label(f1, font=("verdana", 28, "bold"), anchor="center", relief=SUNKEN, border=15,
+hint_lbl = Label(f0, font=("verdana", 10, "bold"), anchor="center", relief=SUNKEN, border=15,
                  bg="#5DADE2", textvariable=hintLbl)
-hint_lbl.pack(fill="both", expand=True, padx=40, pady=5)
+hint_lbl.grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky='nswe')
 
 # enter
 guessed_letter = StringVar()
-enter = Entry(f2, font=("verdana", 22), relief=RIDGE, border=15, justify="center",
+enter = Entry(f0, font=("verdana", 10), relief=RIDGE, border=15, justify="center",
               bg="#744697", textvariable=guessed_letter)
-enter.pack(fill="both", expand=True, padx=60, pady=5)
+enter.grid(row=2,  column=1, columnspan=2, padx=5, pady=5, sticky='nswe')
 enter.bind('<Return>', guess)
 enter.focus()
 
 # lives left
 lives_output = StringVar()
-lbl = Label(f3, font=("verdana", 14), anchor="center", relief=FLAT, border=15,
+lbl = Label(f0, font=("verdana", 10), anchor="center", relief=FLAT, border=15,
             bg="#5DADE2", textvariable=lives_output)
-lbl.pack(fill="both", expand=True, padx=20, pady=5)
+lbl.grid(row=3,  column=1, columnspan=2, padx=5, pady=5, sticky='nswe')
 
 # new game and quit buttons
-new_btn = Button(f4, font=("verdana", 12), anchor="center", relief=RAISED, border=10,
+new_btn = Button(f0, font=("verdana", 10), anchor="center", relief=RAISED, border=10,
                  bg="#5DADE2", text="New Game", command=new_game)
-new_btn.pack(side=LEFT, fill="both", expand=True, padx=15, pady=5)
+new_btn.grid(row=0, column=1, padx=5, pady=5, sticky='nswe')
 
-quit_btn = Button(f4, font=("verdana", 12), anchor="center", relief=RAISED, border=10,
+quit_btn = Button(f0, font=("verdana", 10), anchor="center", relief=RAISED, border=10,
                   bg="#5DADE2", text="Quit", command=quit)
-quit_btn.pack(side=LEFT, fill="both", expand=True, padx=15, pady=5)
+quit_btn.grid(row=0, column=2, padx=5, pady=5, sticky='nswe')
 
 
 root.mainloop()
