@@ -111,4 +111,16 @@ quit_btn = Button(f0, font=("verdana", 15), anchor="center", relief=RAISED, bord
 quit_btn.grid(row=0, column=2, padx=5, pady=5, sticky='nswe')
 
 
+# create menu
+my_menu = Menu(root)
+root.config(menu = my_menu)
+
+# create options dropdown for menu
+option_menu = Menu(my_menu, tearoff=False, background="gray", fg="white")  # tearoff is dotted line.... ugly
+my_menu.add_cascade(label="Options", menu = option_menu)  # create function for menu
+option_menu.add_command(label = "New Game", command = new_game)
+option_menu.add_separator()        # adds line to separate
+option_menu.add_command(label = "Quit", command = quit)
+
+
 root.mainloop()
