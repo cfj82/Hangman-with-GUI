@@ -117,10 +117,10 @@ root.config(menu = my_menu)
 
 # create options dropdown for menu
 option_menu = Menu(my_menu, tearoff=False, background="gray", fg="white")  # tearoff is dotted line.... ugly
-my_menu.add_cascade(label="Options", menu = option_menu)  # create function for menu
-option_menu.add_command(label = "New Game", command = new_game)
+my_menu.add_cascade(label="Options", menu = option_menu)  # create drop down for menu
+option_menu.add_command(label = "New Game", command = new_game)  # create item for drop down menu
 option_menu.add_separator()        # adds line to separate
-option_menu.add_command(label = "Quit", command = quit)
+option_menu.add_command(label = "Quit", command = quit)  # create item for drop down menu
 
 
 root.mainloop()
