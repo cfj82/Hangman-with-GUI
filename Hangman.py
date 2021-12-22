@@ -14,7 +14,7 @@ def new_game():
     global lives
     lives = 7
     word = random.choice(word_bank)
-    img_lbl.config(image=photos[00])  # placed here for when run will show at start
+    img_lbl.config(image=photos[6])  # placed here for when run will show at start
     hint_word = "".join("*" * len(word))  # ' '.join(['a', 'b', 'cd']) --> 'a b cd'
     hintLbl.set(hint_word)  # set output of hint with *
     return word.upper()
@@ -24,7 +24,7 @@ def guess(event):
     global word
     global hint_word
     global lives
-    lives_output.set("You Have " + str(lives) + " Left")
+    lives_output.set("You Have " + str(lives) + " Lives Left")
     guessed_letters = []  # empty set for used letters
     word_letters = list(word)  # make word as set
     if lives > 0:
@@ -36,7 +36,7 @@ def guess(event):
                 guessed_letters.append(letter_guess)  # add guess letter to guessed letters bank
                 enter.delete(0, END)
                 img_lbl.config(image=photos[lives])  # photo number is same as lives
-                lives_output.set("You Have " + str(lives) + " Left")
+                lives_output.set("You Have " + str(lives) + " Lives Left")
             else:  # guess in word
                 guessed_letters.append(letter_guess)  # add guessed letter to guessed letters bank
                 word_as_list = list(hint_word)  # convert word from string to list so can index letters
@@ -71,7 +71,7 @@ root.configure(bg="black")
 root.columnconfigure(0, weight=1)
 
 photos = [PhotoImage(file='1.png'),PhotoImage(file="2.png"),PhotoImage(file="3.png"),
-          PhotoImage(file="4.png"),PhotoImage(file="5.png"),PhotoImage(file="6.png"),PhotoImage(file="00.png")]
+          PhotoImage(file="4.png"),PhotoImage(file="5.png"),PhotoImage(file="6.png"),PhotoImage(file="7.png")]
 
 f0 = Frame(root, bg="black")  # ---- hint
 f0.pack(expand=True)
@@ -79,7 +79,7 @@ f0.pack(expand=True)
 # visuals
 img_lbl = Label(f0)
 img_lbl.grid(row=0, rowspan=4, column=0, sticky='nswe')
-img_lbl.config(image=photos[00])  # placed here for when run will show at start
+img_lbl.config(image=photos[6])  # placed here for when run will show at start
 
 # ---- hint
 hintLbl = StringVar()
